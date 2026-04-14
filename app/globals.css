@@ -105,7 +105,7 @@ summary,
     background-position: inherit;
     background-repeat: inherit;
     background-size: inherit;
-    filter: blur(10px);
+    filter: blur(30px);
     opacity: 0.9;
     -webkit-mask-image: radial-gradient(circle at center, transparent 68%, #000 100%);
     mask-image: radial-gradient(circle at center, transparent 68%, #000 100%);
