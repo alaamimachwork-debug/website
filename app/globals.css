@@ -1,0 +1,319 @@
+:root {
+  --font-qarinthen: sans-serif;
+}
+
+@font-face {
+  font-family: "Qarinthen";
+  src: url("/Qarinthen.otf") format("opentype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Trana";
+  src: url("/TRANA___.TTF") format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Tranga";
+  src: url("/TRANGA__.TTF") format("truetype");
+  font-display: swap;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+
+body {
+  background: #000000;
+  color: #ffffff;
+  cursor: url("/cursor-default.png") 12 12, auto;
+}
+
+main {
+  display: block;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+button,
+a,
+input,
+textarea,
+select,
+summary,
+[role="button"] {
+  cursor: url("/cursor-hover.png") 12 12, auto !important;
+}
+
+.page-shell {
+  min-height: 100vh;
+  position: relative;
+  display: grid;
+  place-items: center;
+  padding: 8px 24px 24px;
+  overflow: hidden;
+}
+
+.page-overlay {
+  position: absolute;
+  inset: 0;
+  background-image: url("/1.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  mix-blend-mode: lighten;
+  opacity: 0.3;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.menu-button {
+  position: absolute;
+  top: 22px;
+  left: 24px;
+  z-index: 2;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 6px;
+  cursor: url("/cursor-hover.png") 12 12, auto !important;
+}
+
+.menu-button span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.95);
+  transition: box-shadow 180ms ease, background 180ms ease;
+}
+
+.menu-button:hover span {
+  background: rgba(255, 255, 255, 1);
+  box-shadow:
+    0 0 16px rgba(255, 255, 255, 0.9),
+    0 0 40px rgba(255, 255, 255, 0.5);
+}
+
+.menu-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0);
+  pointer-events: none;
+  transition: background 220ms ease;
+  z-index: 4;
+}
+
+.menu-backdrop.is-open {
+  background: rgba(0, 0, 0, 0.28);
+  pointer-events: auto;
+}
+
+.menu-drawer {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  bottom: 16px;
+  width: min(320px, calc(100vw - 32px));
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 22px;
+  transform: translateX(calc(-100% - 24px));
+  transition: transform 260ms ease;
+  z-index: 5;
+}
+
+.menu-drawer.is-open {
+  transform: translateX(0);
+}
+
+.menu-close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: url("/cursor-hover.png") 12 12, auto !important;
+}
+
+.menu-close span {
+  position: absolute;
+  top: 17px;
+  left: 7px;
+  width: 22px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.9);
+  transition: box-shadow 180ms ease, background 180ms ease;
+}
+
+.menu-close:hover span {
+  background: rgba(255, 255, 255, 1);
+  box-shadow:
+    0 0 16px rgba(255, 255, 255, 0.9),
+    0 0 40px rgba(255, 255, 255, 0.5);
+}
+
+.menu-close span:first-child {
+  transform: rotate(45deg);
+}
+
+.menu-close span:last-child {
+  transform: rotate(-45deg);
+}
+
+.menu-copy {
+  margin: 88px 28px 0;
+  max-width: 240px;
+  font-family: "Qarinthen", cursive;
+  font-size: clamp(1.5rem, 2.2vw, 2.1rem);
+  line-height: 1.05;
+  color: rgba(255, 255, 255, 0.9);
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.menu-copy p {
+  margin: 0;
+}
+
+.menu-copy p + p {
+  margin-top: 18px;
+}
+
+.menu-copy-bottom {
+  position: absolute;
+  left: 50%;
+  bottom: 32px;
+  margin: 0;
+  transform: translateX(-50%);
+  font-size: clamp(1.1rem, 1.5vw, 1.35rem);
+}
+
+.hero-group {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero-image {
+  width: min(100%, 640px);
+  height: auto;
+  display: block;
+  transform: rotate(-2deg);
+  position: relative;
+  z-index: 2;
+  animation: hero-iridescence 10s ease-in-out infinite alternate;
+}
+
+.hero-caption {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: 0;
+  transform: translateX(-50%);
+  font-family: "Qarinthen", cursive;
+  font-size: clamp(1.15rem, 1.65vw, 1.75rem);
+  line-height: 1;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+  opacity: 0.95;
+  text-align: center;
+  z-index: 2;
+  margin-top: 345px;
+}
+
+.brand-image {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(100%, 400px);
+  height: auto;
+  display: block;
+  margin-top: -64px;
+  z-index: 2;
+}
+
+@keyframes hero-iridescence {
+  0% {
+    filter: invert(0) hue-rotate(0deg) saturate(1) brightness(1) contrast(1);
+  }
+
+  50% {
+    filter: invert(0.18) hue-rotate(80deg) saturate(1.28) brightness(1.04) contrast(1.04);
+  }
+
+  100% {
+    filter: invert(0.32) hue-rotate(180deg) saturate(1.4) brightness(1.06) contrast(1.06);
+  }
+}
+
+
+
+
+
+.season-badge {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 200px;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+}
+
+.season-text {
+  grid-area: 1 / 1;
+  width: 100%;
+  white-space: nowrap;
+  font-size: clamp(3rem, 4vw, 3.4rem);
+  line-height: 1;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.season-text-top {
+  font-family: "Trana", sans-serif;
+  color: rgba(255, 255, 255, 0.92);
+  filter: blur(0.6px);
+  text-shadow:
+    0 0 4px rgba(255, 255, 255, 0.08),
+    0 0 10px rgba(255, 255, 255, 0.03);
+  text-align: left;
+}
+
+.season-text-top.scan-in {
+  text-align: left;
+}
+
+.season-text-top.scan-out {
+  text-align: right;
+}
+
+.season-text-bottom {
+  font-family: "Tranga", sans-serif;
+  color: rgba(255, 255, 255, 0.25);
+  filter: blur(1.5px);
+  text-align: left;
+}

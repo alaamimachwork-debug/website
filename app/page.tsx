@@ -1,0 +1,121 @@
+ "use client";
+
+import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
+
+const seasonFrames = [
+  { text: "7", phase: "scan-in", duration: 320 },
+  { text: "27", phase: "scan-in", duration: 320 },
+  { text: "/27", phase: "scan-in", duration: 320 },
+  { text: "6/27", phase: "scan-in", duration: 320 },
+  { text: "26/27", phase: "scan-in", duration: 320 },
+  { text: "W26/27", phase: "scan-in", duration: 320 },
+  { text: "FW26/27", phase: "scan-in", duration: 1000 },
+  { text: "FW26/27", phase: "scan-out", duration: 320 },
+  { text: "FW26/2", phase: "scan-out", duration: 320 },
+  { text: "FW26/", phase: "scan-out", duration: 320 },
+  { text: "FW26", phase: "scan-out", duration: 320 },
+  { text: "FW2", phase: "scan-out", duration: 320 },
+  { text: "FW", phase: "scan-out", duration: 320 },
+  { text: "F", phase: "scan-out", duration: 320 },
+  { text: "", phase: "scan-out", duration: 1000 }
+] as const;
+
+export default function HomePage() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [seasonFrameIndex, setSeasonFrameIndex] = useState(0);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  useEffect(() => {
+    const timeoutId = window.setTimeout(() => {
+      setSeasonFrameIndex((currentIndex) => (currentIndex + 1) % seasonFrames.length);
+    }, seasonFrames[seasonFrameIndex].duration);
+
+    return () => window.clearTimeout(timeoutId);
+  }, [seasonFrameIndex]);
+
+  useEffect(() => {
+    const audioElement = audioRef.current;
+
+    if (!audioElement) {
+      return;
+    }
+
+    const tryPlay = () => {
+      void audioElement.play().catch(() => {
+        // Browsers may block autoplay until the first user interaction.
+      });
+    };
+
+    window.addEventListener("pointerdown", tryPlay, { once: true });
+
+    return () => {
+      window.removeEventListener("pointerdown", tryPlay);
+    };
+  }, []);
+
+  return (
+    <main className="page-shell">
+      <audio ref={audioRef} src="/Ambient 2.mp3" loop preload="auto" />
+      <div className="page-overlay" aria-hidden="true" />
+      <button
+        type="button"
+        className="menu-button"
+        aria-label="Open menu"
+        aria-expanded={isMenuOpen}
+        onClick={() => setIsMenuOpen(true)}
+      >
+        <span />
+        <span />
+        <span />
+      </button>
+      <div
+        className={`menu-backdrop${isMenuOpen ? " is-open" : ""}`}
+        aria-hidden={!isMenuOpen}
+        onClick={() => setIsMenuOpen(false)}
+      />
+      <aside className={`menu-drawer${isMenuOpen ? " is-open" : ""}`} aria-hidden={!isMenuOpen}>
+        <button
+          type="button"
+          className="menu-close"
+          aria-label="Close menu"
+          onClick={() => setIsMenuOpen(false)}
+        >
+          <span />
+          <span />
+        </button>
+        <div className="menu-copy">
+          <p>An avant-garde design house by Adam Laamimach</p>
+        </div>
+        <p className="menu-copy menu-copy-bottom">Based in Amsterdam</p>
+      </aside>
+      <Image
+        src="/Maison D'Aprile23.png"
+        alt="Maison D'Aprile"
+        width={3840}
+        height={2160}
+        priority
+        className="brand-image"
+      />
+      <div className="hero-group">
+        <Image
+          src="/abstract-rectangle-sticker-10.png"
+          alt=""
+          width={1024}
+          height={319}
+          priority
+          className="hero-image"
+        />
+      </div>
+      <p className="hero-caption">COMING SOON</p>
+      <div className="season-badge" aria-label="Fall Winter 2026 2027">
+        <span
+          className={`season-text season-text-top ${seasonFrames[seasonFrameIndex].phase}`}
+        >
+          {seasonFrames[seasonFrameIndex].text}
+        </span>
+        <span className="season-text season-text-bottom">FW26/27</span>
+      </div>
+    </main>
+  );
+}
