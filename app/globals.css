@@ -28,38 +28,9 @@ body {
 }
 
 body {
-  position: relative;
   background: #000000;
   color: #ffffff;
   cursor: url("/cursor-default.png") 12 12, auto;
-}
-
-@media (max-width: 1024px) {
-  body {
-    background-image: url("/1.jpg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
-
-  body::before {
-    content: "";
-    position: fixed;
-    top: -12vh;
-    right: 0;
-    bottom: -12vh;
-    left: 0;
-    background-image: url("/1.jpg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    opacity: 0.32;
-    filter: blur(18px);
-    transform: scale(1.12);
-    transform-origin: center;
-    pointer-events: none;
-    z-index: 0;
-  }
 }
 
 main {
@@ -89,7 +60,6 @@ summary,
   place-items: center;
   padding: 8px 24px 24px;
   overflow: hidden;
-  z-index: 1;
 }
 
 @media (max-width: 1024px) {
