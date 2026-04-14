@@ -93,6 +93,14 @@ summary,
   cursor: url("/cursor-hover.png") 12 12, auto !important;
 }
 
+@media (max-width: 1024px) {
+  .menu-button {
+    top: calc(env(safe-area-inset-top, 0px) + 22px);
+    left: calc(env(safe-area-inset-left, 0px) + 24px);
+    z-index: 4;
+  }
+}
+
 .menu-button span {
   display: block;
   width: 22px;
@@ -252,6 +260,14 @@ summary,
   display: block;
   margin-top: -64px;
   z-index: 2;
+}
+
+@media (max-width: 1024px) {
+  .brand-image {
+    width: min(100%, 320px);
+    margin-top: -47px;
+    transform: translateX(calc(-50% + 2px));
+  }
 }
 
 @keyframes hero-iridescence {
