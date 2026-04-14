@@ -75,6 +75,13 @@ summary,
   z-index: 3;
 }
 
+@media (max-width: 1024px) {
+  .page-overlay {
+    transform: scale(1.1);
+    transform-origin: center;
+  }
+}
+
 .menu-button {
   position: absolute;
   top: 22px;
