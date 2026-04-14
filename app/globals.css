@@ -24,9 +24,7 @@ html,
 body {
   margin: 0;
   padding: 0;
-  height: 100%;
   min-height: 100%;
-  overflow: hidden;
 }
 
 body {
@@ -64,16 +62,6 @@ summary,
   overflow: hidden;
 }
 
-@media (max-width: 1024px) {
-  .page-shell {
-    min-height: 100dvh;
-    padding-top: 0;
-    padding-right: calc(env(safe-area-inset-right, 0px) + 20px);
-    padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 20px);
-    padding-left: calc(env(safe-area-inset-left, 0px) + 20px);
-  }
-}
-
 .page-overlay {
   position: absolute;
   inset: 0;
@@ -85,33 +73,6 @@ summary,
   opacity: 0.3;
   pointer-events: none;
   z-index: 3;
-}
-
-@media (max-width: 1024px) {
-  .page-overlay {
-    position: fixed;
-    top: calc(env(safe-area-inset-top, 0px) * -1 - 14vh);
-    right: 0;
-    bottom: calc(env(safe-area-inset-bottom, 0px) * -1 - 14vh);
-    left: 0;
-    background-size: cover;
-    transform: scale(1.16);
-    transform-origin: center;
-  }
-
-  .page-overlay::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image: inherit;
-    background-position: inherit;
-    background-repeat: inherit;
-    background-size: inherit;
-    filter: blur(30px);
-    opacity: 0.9;
-    -webkit-mask-image: radial-gradient(circle at center, transparent 68%, #000 100%);
-    mask-image: radial-gradient(circle at center, transparent 68%, #000 100%);
-  }
 }
 
 .menu-button {
@@ -306,18 +267,6 @@ summary,
     width: min(100%, 320px);
     margin-top: -47px;
     transform: translateX(calc(-50% + 2px));
-  }
-
-  .season-badge {
-    margin-top: 160px;
-  }
-
-  .hero-caption {
-    margin-top: 305px;
-  }
-
-  .hero-group {
-    transform: translateY(-20px);
   }
 }
 
