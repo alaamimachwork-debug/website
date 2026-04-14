@@ -96,6 +96,20 @@ summary,
     transform: scale(1.08);
     transform-origin: center;
   }
+
+  .page-overlay::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: inherit;
+    background-position: inherit;
+    background-repeat: inherit;
+    background-size: inherit;
+    filter: blur(10px);
+    opacity: 0.9;
+    -webkit-mask-image: radial-gradient(circle at center, transparent 68%, #000 100%);
+    mask-image: radial-gradient(circle at center, transparent 68%, #000 100%);
+  }
 }
 
 .menu-button {
