@@ -90,12 +90,12 @@ summary,
 @media (max-width: 1024px) {
   .page-overlay {
     position: fixed;
-    top: calc(env(safe-area-inset-top, 0px) * -1 - 8vh);
+    top: calc(env(safe-area-inset-top, 0px) * -1 - 14vh);
     right: 0;
-    bottom: calc(env(safe-area-inset-bottom, 0px) * -1 - 8vh);
+    bottom: calc(env(safe-area-inset-bottom, 0px) * -1 - 14vh);
     left: 0;
     background-size: cover;
-    transform: scale(1.08);
+    transform: scale(1.16);
     transform-origin: center;
   }
 
