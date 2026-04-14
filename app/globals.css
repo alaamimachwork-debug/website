@@ -64,7 +64,7 @@ summary,
 
 @media (max-width: 1024px) {
   .page-shell {
-    padding-top: calc(env(safe-area-inset-top, 0px) + 8px);
+    padding-top: 8px;
     padding-right: calc(env(safe-area-inset-right, 0px) + 20px);
     padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 20px);
     padding-left: calc(env(safe-area-inset-left, 0px) + 20px);
@@ -279,11 +279,15 @@ summary,
   }
 
   .season-badge {
-    margin-top: 180px;
+    margin-top: 160px;
   }
 
   .hero-caption {
-    margin-top: 325px;
+    margin-top: 305px;
+  }
+
+  .hero-group {
+    transform: translateY(-20px);
   }
 }
 
