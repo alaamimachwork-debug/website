@@ -73,9 +73,9 @@ summary,
   pointer-events: none;
   z-index: 12;
   transition:
-    opacity 900ms ease,
-    backdrop-filter 900ms ease,
-    -webkit-backdrop-filter 900ms ease;
+    opacity 2000ms ease,
+    backdrop-filter 2000ms ease,
+    -webkit-backdrop-filter 2000ms ease;
 }
 
 .page-shell.is-revealed::after {
@@ -378,7 +378,7 @@ summary,
 
 .hero-caption {
   position: absolute;
-  top: 50%;
+  top: min(calc(50% + 345px), calc(100% - 31px));
   left: 50%;
   margin: 0;
   transform: translateX(-50%);
@@ -390,7 +390,6 @@ summary,
   opacity: 0.95;
   text-align: center;
   z-index: 2;
-  margin-top: 345px;
 }
 
 .brand-image {
@@ -417,7 +416,7 @@ summary,
   }
 
   .hero-caption {
-    margin-top: 295px;
+    top: min(calc(50% + 295px), calc(100% - 29px));
   }
 }
 
