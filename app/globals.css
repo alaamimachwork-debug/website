@@ -111,6 +111,16 @@ summary,
   box-shadow: 0 1px 14px rgba(0, 0, 0, 0.6);
   isolation: isolate;
   z-index: 4;
+  transition:
+    filter 220ms ease,
+    backdrop-filter 220ms ease,
+    -webkit-backdrop-filter 220ms ease,
+    background 220ms ease;
+}
+
+.top-header.is-menu-open {
+  background: rgba(0, 0, 0, 0.42);
+  filter: blur(14px);
 }
 
 .top-header::after {
@@ -233,8 +243,6 @@ summary,
 
 .menu-backdrop.is-open {
   background: rgba(0, 0, 0, 0.28);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
   pointer-events: auto;
 }
 

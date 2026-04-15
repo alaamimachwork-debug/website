@@ -92,7 +92,7 @@ export default function HomePage() {
     <main className={`page-shell${isRevealed ? " is-revealed" : ""}`}>
       <audio ref={audioRef} src="/Ambient 2.mp3" loop preload="auto" />
       <div className="page-overlay" aria-hidden="true" />
-      <header className="top-header">
+      <header className={`top-header${isMenuOpen ? " is-menu-open" : ""}`}>
         <button
           type="button"
           className="menu-button"
