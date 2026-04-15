@@ -25,6 +25,7 @@ body {
   margin: 0;
   padding: 0;
   min-height: 100%;
+  overflow: hidden;
 }
 
 body {
@@ -242,7 +243,7 @@ summary,
   left: 24px;
   bottom: 16px;
   width: min(320px, calc(100vw - 32px));
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 0.5px solid rgba(255, 255, 255, 0.1);
   background: rgba(0, 0, 0, 0.28);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
@@ -259,7 +260,7 @@ summary,
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  padding: 0.7px;
+  padding: 0.45px;
   background: linear-gradient(
     115deg,
       rgba(255, 255, 255, 0.05) 0%,
@@ -274,8 +275,8 @@ summary,
     linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
-  opacity: 0.4;
-  animation: border-sheen 6s ease-in-out infinite;
+  opacity: 0.5;
+  animation: border-sheen 7.5s linear infinite;
   pointer-events: none;
 }
 
