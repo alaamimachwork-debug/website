@@ -92,10 +92,10 @@ export default function HomePage() {
     <main className={`page-shell${isRevealed ? " is-revealed" : ""}`}>
       <audio ref={audioRef} src="/Ambient 2.mp3" loop preload="auto" />
       <div className="page-overlay" aria-hidden="true" />
-      <header className={`top-header${isMenuOpen ? " is-menu-open" : ""}`}>
+      <header className="top-header">
         <button
           type="button"
-          className="menu-button"
+          className={`menu-button${isMenuOpen ? " is-menu-open" : ""}`}
           aria-label="Open menu"
           aria-expanded={isMenuOpen}
           onClick={() => setIsMenuOpen(true)}
@@ -110,7 +110,7 @@ export default function HomePage() {
           width={3840}
           height={2160}
           priority
-          className="brand-image"
+          className={`brand-image${isMenuOpen ? " is-menu-open" : ""}`}
         />
       </header>
       <div
