@@ -26,14 +26,39 @@ export default function HomePage() {
   const [seasonFrameIndex, setSeasonFrameIndex] = useState(0);
   const [isRevealed, setIsRevealed] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const seasonFrameIndexRef = useRef(0);
 
   useEffect(() => {
-    const timeoutId = window.setTimeout(() => {
-      setSeasonFrameIndex((currentIndex) => (currentIndex + 1) % seasonFrames.length);
-    }, seasonFrames[seasonFrameIndex].duration);
+    let timeoutId = 0;
 
-    return () => window.clearTimeout(timeoutId);
-  }, [seasonFrameIndex]);
+    const scheduleNext = (delayMs: number) => {
+      timeoutId = window.setTimeout(() => {
+        const nextIndex = (seasonFrameIndexRef.current + 1) % seasonFrames.length;
+        seasonFrameIndexRef.current = nextIndex;
+        setSeasonFrameIndex(nextIndex);
+        scheduleNext(seasonFrames[nextIndex].duration);
+      }, delayMs);
+    };
+
+    const handleVisibilityChange = () => {
+      if (document.visibilityState !== "visible") {
+        return;
+      }
+
+      window.clearTimeout(timeoutId);
+      scheduleNext(seasonFrames[seasonFrameIndexRef.current].duration);
+    };
+
+    seasonFrameIndexRef.current = 0;
+    setSeasonFrameIndex(0);
+    scheduleNext(seasonFrames[0].duration);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    return () => {
+      window.clearTimeout(timeoutId);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, []);
 
   useEffect(() => {
     const audioElement = audioRef.current;
