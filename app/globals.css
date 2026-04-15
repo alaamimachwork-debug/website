@@ -30,7 +30,7 @@ body {
 body {
   background: #000000;
   color: #ffffff;
-  cursor: url("/cursor-default.png") 12 12, auto;
+  cursor: url("/cursor-default.png") 27 27, auto;
 }
 
 main {
@@ -50,7 +50,7 @@ textarea,
 select,
 summary,
 [role="button"] {
-  cursor: url("/cursor-default.png") 12 12, auto !important;
+  cursor: url("/cursor-default.png") 27 27, auto !important;
 }
 
 .page-shell {
@@ -97,7 +97,7 @@ summary,
   align-items: flex-start;
   justify-content: center;
   gap: 6px;
-  cursor: url("/cursor-default.png") 12 12, auto !important;
+  cursor: url("/cursor-default.png") 27 27, auto !important;
 }
 
 @media (max-width: 1024px) {
@@ -167,25 +167,7 @@ summary,
   padding: 0;
   border: 0;
   background: transparent;
-  cursor: url("/cursor-default.png") 12 12, auto !important;
-}
-
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 2dppx) {
-  body {
-    cursor: url("/cursor-favicon.png") 27 27, auto;
-  }
-
-  button,
-  a,
-  input,
-  textarea,
-  select,
-  summary,
-  [role="button"],
-  .menu-button,
-  .menu-close {
-    cursor: url("/cursor-favicon.png") 27 27, auto !important;
-  }
+  cursor: url("/cursor-default.png") 27 27, auto !important;
 }
 
 .menu-close span {
