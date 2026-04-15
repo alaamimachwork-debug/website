@@ -25,7 +25,6 @@ body {
   margin: 0;
   padding: 0;
   min-height: 100%;
-  overflow: hidden;
 }
 
 body {
@@ -190,11 +189,16 @@ summary,
   gap: 6px;
   cursor: url("/cursor-default.png") 12 12, auto !important;
   border-radius: 12px;
-  transition: filter 220ms ease;
+  clip-path: inset(-18px);
+  will-change: filter, transform;
+  transition:
+    filter 220ms ease,
+    transform 220ms ease;
 }
 
 .menu-button.is-menu-open {
-  filter: blur(14px);
+  filter: blur(10px);
+  transform: translateY(-50%) scale(1.04);
 }
 
 @media (max-width: 1024px) {
@@ -334,7 +338,7 @@ summary,
 }
 
 .menu-copy {
-  margin: 88px 28px 0;
+  margin: 88px auto 0;
   max-width: 240px;
   font-family: "Qarinthen", cursive;
   font-size: clamp(1.5rem, 2.2vw, 2.1rem);
@@ -405,11 +409,16 @@ summary,
   object-fit: contain;
   display: block;
   z-index: 2;
-  transition: filter 220ms ease;
+  clip-path: inset(-24px);
+  will-change: filter, transform;
+  transition:
+    filter 220ms ease,
+    transform 220ms ease;
 }
 
 .brand-image.is-menu-open {
-  filter: blur(14px);
+  filter: blur(10px);
+  transform: translateY(15px) scale(1.03);
 }
 
 @media (max-width: 1024px) {
@@ -417,6 +426,10 @@ summary,
     max-width: calc(100% - 112px);
     height: calc(100% + 12px);
     transform: translateY(13px);
+  }
+
+  .brand-image.is-menu-open {
+    transform: translateY(13px) scale(1.03);
   }
 
   .season-badge {
