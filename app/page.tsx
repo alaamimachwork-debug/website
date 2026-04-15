@@ -26,45 +26,14 @@ export default function HomePage() {
   const [seasonFrameIndex, setSeasonFrameIndex] = useState(0);
   const [isRevealed, setIsRevealed] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const seasonFrameIndexRef = useRef(0);
-  const seasonElapsedRef = useRef(0);
 
   useEffect(() => {
-    seasonFrameIndexRef.current = seasonFrameIndex;
+    const timeoutId = window.setTimeout(() => {
+      setSeasonFrameIndex((currentIndex) => (currentIndex + 1) % seasonFrames.length);
+    }, seasonFrames[seasonFrameIndex].duration);
+
+    return () => window.clearTimeout(timeoutId);
   }, [seasonFrameIndex]);
-
-  useEffect(() => {
-    let animationFrameId = 0;
-    let previousTimestamp = 0;
-
-    const tick = (timestamp: number) => {
-      if (previousTimestamp === 0) {
-        previousTimestamp = timestamp;
-      }
-
-      const delta = timestamp - previousTimestamp;
-      previousTimestamp = timestamp;
-      seasonElapsedRef.current += delta;
-
-      const activeIndex = seasonFrameIndexRef.current;
-      const activeDuration = seasonFrames[activeIndex].duration;
-
-      if (seasonElapsedRef.current >= activeDuration) {
-        seasonElapsedRef.current -= activeDuration;
-        const nextIndex = (activeIndex + 1) % seasonFrames.length;
-        seasonFrameIndexRef.current = nextIndex;
-        setSeasonFrameIndex(nextIndex);
-      }
-
-      animationFrameId = window.requestAnimationFrame(tick);
-    };
-
-    animationFrameId = window.requestAnimationFrame(tick);
-
-    return () => {
-      window.cancelAnimationFrame(animationFrameId);
-    };
-  }, []);
 
   useEffect(() => {
     const audioElement = audioRef.current;
