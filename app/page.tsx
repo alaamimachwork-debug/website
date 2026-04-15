@@ -24,6 +24,7 @@ const seasonFrames = [
 export default function HomePage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [seasonFrameIndex, setSeasonFrameIndex] = useState(0);
+  const [isRevealed, setIsRevealed] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
@@ -54,21 +55,39 @@ export default function HomePage() {
     };
   }, []);
 
+  useEffect(() => {
+    const frameId = window.requestAnimationFrame(() => {
+      setIsRevealed(true);
+    });
+
+    return () => window.cancelAnimationFrame(frameId);
+  }, []);
+
   return (
-    <main className="page-shell">
+    <main className={`page-shell${isRevealed ? " is-revealed" : ""}`}>
       <audio ref={audioRef} src="/Ambient 2.mp3" loop preload="auto" />
       <div className="page-overlay" aria-hidden="true" />
-      <button
-        type="button"
-        className="menu-button"
-        aria-label="Open menu"
-        aria-expanded={isMenuOpen}
-        onClick={() => setIsMenuOpen(true)}
-      >
-        <span />
-        <span />
-        <span />
-      </button>
+      <header className="top-header">
+        <button
+          type="button"
+          className="menu-button"
+          aria-label="Open menu"
+          aria-expanded={isMenuOpen}
+          onClick={() => setIsMenuOpen(true)}
+        >
+          <span />
+          <span />
+          <span />
+        </button>
+        <Image
+          src="/Maison D'Aprile23.png"
+          alt="Maison D'Aprile"
+          width={3840}
+          height={2160}
+          priority
+          className="brand-image"
+        />
+      </header>
       <div
         className={`menu-backdrop${isMenuOpen ? " is-open" : ""}`}
         aria-hidden={!isMenuOpen}
@@ -89,14 +108,6 @@ export default function HomePage() {
         </div>
         <p className="menu-copy menu-copy-bottom">Based in Amsterdam</p>
       </aside>
-      <Image
-        src="/Maison D'Aprile23.png"
-        alt="Maison D'Aprile"
-        width={3840}
-        height={2160}
-        priority
-        className="brand-image"
-      />
       <div className="hero-group">
         <Image
           src="/abstract-rectangle-sticker-10.png"

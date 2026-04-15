@@ -30,7 +30,7 @@ body {
 body {
   background: #000000;
   color: #ffffff;
-  cursor: url("/cursor-default.png") 14 14, auto;
+  cursor: url("/cursor-default.png") 12 12, auto;
 }
 
 main {
@@ -50,7 +50,7 @@ textarea,
 select,
 summary,
 [role="button"] {
-  cursor: url("/cursor-default.png") 14 14, auto !important;
+  cursor: url("/cursor-default.png") 12 12, auto !important;
 }
 
 .page-shell {
@@ -60,6 +60,27 @@ summary,
   place-items: center;
   padding: 8px 24px 24px;
   overflow: hidden;
+}
+
+.page-shell::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.82);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  pointer-events: none;
+  z-index: 12;
+  transition:
+    opacity 900ms ease,
+    backdrop-filter 900ms ease,
+    -webkit-backdrop-filter 900ms ease;
+}
+
+.page-shell.is-revealed::after {
+  opacity: 0;
+  backdrop-filter: blur(0);
+  -webkit-backdrop-filter: blur(0);
 }
 
 .page-overlay {
@@ -75,17 +96,70 @@ summary,
   z-index: 3;
 }
 
+.top-header {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  right: 24px;
+  height: 74px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(0, 0, 0, 0.18);
+  backdrop-filter: blur(18px) saturate(120%);
+  -webkit-backdrop-filter: blur(18px) saturate(120%);
+  border-radius: 22px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22);
+  overflow: hidden;
+  isolation: isolate;
+  z-index: 4;
+}
+
+.top-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    115deg,
+    rgba(255, 255, 255, 0.08) 0%,
+    rgba(255, 255, 255, 0.55) 35%,
+    rgba(255, 255, 255, 0.08) 52%,
+    rgba(255, 255, 255, 0.4) 68%,
+    rgba(255, 255, 255, 0.08) 100%
+  );
+  background-size: 240% 100%;
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0.45;
+  animation: border-sheen 7s ease-in-out infinite;
+  pointer-events: none;
+}
+
 @media (max-width: 1024px) {
   .page-overlay {
     transform: scale(1.1);
     transform-origin: center;
   }
+
+  .top-header {
+    top: calc(env(safe-area-inset-top, 0px) + 17px);
+    left: calc(env(safe-area-inset-left, 0px) + 20px);
+    right: calc(env(safe-area-inset-right, 0px) + 20px);
+    height: 64px;
+  }
 }
 
 .menu-button {
   position: absolute;
-  top: 22px;
-  left: 24px;
+  top: 50%;
+  left: 16px;
+  transform: translateY(-50%);
   z-index: 2;
   width: 38px;
   height: 38px;
@@ -97,19 +171,21 @@ summary,
   align-items: flex-start;
   justify-content: center;
   gap: 6px;
-  cursor: url("/cursor-default.png") 14 14, auto !important;
+  cursor: url("/cursor-default.png") 12 12, auto !important;
+  border-radius: 12px;
 }
 
 @media (max-width: 1024px) {
   .menu-button {
-    top: calc(env(safe-area-inset-top, 0px) + 22px);
-    left: calc(env(safe-area-inset-left, 0px) + 24px);
+    left: 16px;
     z-index: 4;
   }
 }
 
 .menu-button span {
   display: block;
+  position: relative;
+  z-index: 1;
   width: 22px;
   height: 2px;
   background: rgba(255, 255, 255, 0.95);
@@ -140,8 +216,8 @@ summary,
 
 .menu-drawer {
   position: absolute;
-  top: 16px;
-  left: 16px;
+  top: 24px;
+  left: 24px;
   bottom: 16px;
   width: min(320px, calc(100vw - 32px));
   border: 1px solid rgba(255, 255, 255, 0.12);
@@ -151,7 +227,41 @@ summary,
   border-radius: 22px;
   transform: translateX(calc(-100% - 24px));
   transition: transform 260ms ease;
+  overflow: hidden;
+  isolation: isolate;
   z-index: 5;
+}
+
+.menu-drawer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    115deg,
+    rgba(255, 255, 255, 0.08) 0%,
+    rgba(255, 255, 255, 0.55) 35%,
+    rgba(255, 255, 255, 0.08) 52%,
+    rgba(255, 255, 255, 0.4) 68%,
+    rgba(255, 255, 255, 0.08) 100%
+  );
+  background-size: 240% 100%;
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0.45;
+  animation: border-sheen 6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@media (max-width: 1024px) {
+  .menu-drawer {
+    top: calc(env(safe-area-inset-top, 0px) + 17px);
+    left: calc(env(safe-area-inset-left, 0px) + 20px);
+  }
 }
 
 .menu-drawer.is-open {
@@ -167,7 +277,7 @@ summary,
   padding: 0;
   border: 0;
   background: transparent;
-  cursor: url("/cursor-default.png") 14 14, auto !important;
+  cursor: url("/cursor-default.png") 12 12, auto !important;
 }
 
 .menu-close span {
@@ -260,22 +370,20 @@ summary,
 }
 
 .brand-image {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: min(100%, 400px);
-  height: auto;
+  position: relative;
+  left: 5px;
+  width: auto;
+  height: calc(100% - 12px);
+  max-width: min(calc(100% - 104px), 348px);
+  object-fit: contain;
   display: block;
-  margin-top: -64px;
   z-index: 2;
 }
 
 @media (max-width: 1024px) {
   .brand-image {
-    width: min(100%, 320px);
-    margin-top: -47px;
-    transform: translateX(calc(-50% + 2px));
+    max-width: calc(100% - 114px);
+    height: calc(100% - 12px);
   }
 
   .season-badge {
@@ -298,6 +406,20 @@ summary,
 
   100% {
     filter: invert(0.32) hue-rotate(180deg) saturate(1.4) brightness(1.06) contrast(1.06);
+  }
+}
+
+@keyframes border-sheen {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
   }
 }
 
